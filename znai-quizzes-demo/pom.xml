@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2020 znai maintainers
+  ~ Copyright 2019 TWO SIGMA OPEN SOURCE, LLC
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.testingisdocumenting.znai</groupId>
+        <artifactId>znai-quizzes</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>znai-quizzes-demo</artifactId>
+    <name>Znai Docs Demo Using quizzes</name>
+
+    <profiles>
+        <profile>
+            <id>docs-building</id>
+            <activation>
+                <property><name>!skipTests</name></property>
+            </activation>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>resources</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.testingisdocumenting.znai</groupId>
+                        <artifactId>znai-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>build</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>build</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>export</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>export</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>validate-export</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>build</goal>
+                                </goals>
+                                <configuration>
+                                    <docId>znai-from-export</docId>
+                                    <sourceRoot>${project.build.directory}/znai-export</sourceRoot>
+                                </configuration>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <docId>znai</docId>
+                            <port>3334</port>
+                        </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>junit</groupId>
+                                <artifactId>junit</artifactId>
+                                <version>${junit.version}</version>
+                                <classifier>sources</classifier>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.testingisdocumenting.znai</groupId>
+                                <artifactId>znai-quizzes-extension</artifactId>
+                                <version>0.0.1-SNAPSHOT</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
