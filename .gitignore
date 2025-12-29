@@ -6,7 +6,7 @@
 .project
 target
 node_modules
-znai-reactjs/build
+znai-quizzes-extension/build
 *.iml
 .vertx
 docs-build
