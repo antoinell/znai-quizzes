@@ -19,3 +19,4 @@ webtau.report.html
 .webtau-cache
 venv
 doc-artifacts
+/znai-quizzes-extension/dist/
