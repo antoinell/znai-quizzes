@@ -16,6 +16,7 @@
 
 
 import Quiz from 'react-quiz-component';
+import registerZnaiQuizComponent from '../../ZnaiQuizComponentRegistration.ts';
 
 import "./Quizzes.css";
 
@@ -30,4 +31,5 @@ export default function ZnaiQuiz(props: Props) {
     <Quiz quiz={props.quiz}/>
   </div>;
 }
+registerZnaiQuizComponent();
 

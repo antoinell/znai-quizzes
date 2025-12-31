@@ -59,9 +59,8 @@
 
                         <fileset dir="dist" id="extra-js">
                             <include name="*.js"/>
-                            <include name="*.css"/>
-                            <include name="*.umd.cjs"/>
                         </fileset>
+
 
                         <copy todir="${project.build.outputDirectory}/static">
                             <fileset refid="extra-js"/>
@@ -77,6 +76,23 @@
 
                         <!-- Write to a file -->
                         <echo file="${project.build.outputDirectory}/META-INF/znai/javascript-files.txt">${js.files.list}</echo>
+                        <!-- same for css -->
+                        <fileset dir="dist" id="extra-css">
+                            <include name="*.css"/>
+                        </fileset>
+                        <copy todir="${project.build.outputDirectory}/static">
+                            <fileset refid="extra-css"/>
+                        </copy>
+                        <pathconvert property="css.files.list" pathsep="${line.separator}">
+                            <fileset refid="extra-css"/>
+                            <chainedmapper>
+                                <mapper type="flatten"/>
+                                <mapper type="regexp" from="^(.*)$$" to="static/\1"/>
+                            </chainedmapper>
+                        </pathconvert>
+
+                        <!-- Write to a file -->
+                        <echo file="${project.build.outputDirectory}/META-INF/znai/css-files.txt">${css.files.list}</echo>
 
                     </target>
                 </configuration>
