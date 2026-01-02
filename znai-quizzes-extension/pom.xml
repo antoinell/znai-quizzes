@@ -31,7 +31,7 @@
         <dependency>
             <groupId>org.testingisdocumenting.znai</groupId>
             <artifactId>znai-core</artifactId>
-            <version>1.84-SNAPSHOT</version>
+            <version>1.85-SNAPSHOT</version>
         </dependency>
     </dependencies>
     <build>
