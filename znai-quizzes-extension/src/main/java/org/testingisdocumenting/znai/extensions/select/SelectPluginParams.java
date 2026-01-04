@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package org.testingisdocumenting.znai.extensions.quiz;
+package org.testingisdocumenting.znai.extensions.select;
 
 import org.testingisdocumenting.znai.extensions.PluginParamType;
 import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 
-class QuizPluginParams {
+class SelectPluginParams {
     static final PluginParamsDefinition definition = new PluginParamsDefinition()
-            .add("wide", PluginParamType.BOOLEAN, "use all the horizontal space for the diagram", "true");
+            .add("selectedOption", PluginParamType.OBJECT, "selected option", "true");
 
 }

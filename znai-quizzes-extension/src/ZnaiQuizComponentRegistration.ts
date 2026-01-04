@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import ZnaiQuiz from './doc-elements/znai-quizzes/Quizzes';
+import {ZnaiSelect} from './doc-elements/znai-select/ZnaiSelect';
 
 // Extend the znai library with the quiz component
 declare global {
@@ -30,13 +30,13 @@ declare global {
 }
 
 // Register the component when the script loads
-function registerZnaiQuizComponent() {
+function registerZnaiSelectComponent() {
   // Wait for znai to be available
   const checkAndRegister = () => {
     if (window.znai?.elementsLibrary?.library) {
       // Register the ZnaiQuiz component
-      window.znai.elementsLibrary.library.ZnaiQuiz = ZnaiQuiz;
-      console.log('ZnaiQuiz component registered successfully');
+      window.znai.elementsLibrary.library.ZnaiSelect = ZnaiSelect;
+      console.log('ZnaiSelect component registered successfully');
     } else {
       // Retry after a short delay
       setTimeout(checkAndRegister, 100);
@@ -49,12 +49,12 @@ function registerZnaiQuizComponent() {
 // Auto-register when script loads
 if (typeof window !== 'undefined') {
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', registerZnaiQuizComponent);
+    document.addEventListener('DOMContentLoaded', registerZnaiSelectComponent);
   } else {
-    registerZnaiQuizComponent();
+    registerZnaiSelectComponent();
   }
 }
 
 // Also export for manual registration if needed
-export { ZnaiQuiz, registerZnaiQuizComponent };
-export default registerZnaiQuizComponent;
+export { ZnaiSelect, registerZnaiSelectComponent };
+export default registerZnaiSelectComponent;

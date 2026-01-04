@@ -2,7 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import QuizzesDemo from './doc-elements/znai-quizzes/Quizzes.demo'
+import ZnaiSelectDemo from './doc-elements/znai-select/ZnaiSelectDemo'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -29,8 +29,8 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-        <p><h1>Znai Quizzes Extension</h1>
-            <QuizzesDemo />
+        <p><h1>Znai Select Extension</h1>
+            <ZnaiSelectDemo/>
 
         </p>
     </>
