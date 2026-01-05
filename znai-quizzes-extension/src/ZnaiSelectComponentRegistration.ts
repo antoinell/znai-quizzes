@@ -30,20 +30,47 @@ declare global {
 }
 
 // Register the component when the script loads
-function registerZnaiSelectComponent() {
-  // Wait for znai to be available
-  const checkAndRegister = () => {
-    if (window.znai?.elementsLibrary?.library) {
-      // Register the ZnaiQuiz component
-      window.znai.elementsLibrary.library.ZnaiSelect = ZnaiSelect;
-      console.log('ZnaiSelect component registered successfully');
-    } else {
-      // Retry after a short delay
-      setTimeout(checkAndRegister, 100);
+async function registerZnaiSelectComponent() {
+  const checkAndRegister = async () => {
+    try {
+      // Import from the module map
+      const module = await import('znai-components');
+
+      // Check if elementsLibrary exists
+      if (module.elementsLibrary?.library) {
+        module.elementsLibrary.library.ZnaiSelect = ZnaiSelect;
+        console.log('ZnaiSelect component registered successfully');
+        return true;
+      } else {
+        console.warn('elementsLibrary not found in znai-components');
+        return false;
+      }
+    } catch (e) {
+      console.error('Failed to import znai-components:', e);
+      return false;
     }
   };
-  
-  checkAndRegister();
+
+  // Try immediate registration
+  const success = await checkAndRegister();
+
+  // If failed, retry with polling
+  if (!success) {
+    let attempts = 0;
+    const maxAttempts = 10;
+
+    const interval = setInterval(async () => {
+      attempts++;
+      const retrySuccess = await checkAndRegister();
+
+      if (retrySuccess || attempts >= maxAttempts) {
+        clearInterval(interval);
+        if (!retrySuccess) {
+          console.warn(`Failed to register ZnaiSelect after ${maxAttempts} attempts`);
+        }
+      }
+    }, 500); // Check every 500ms
+  }
 }
 
 // Auto-register when script loads

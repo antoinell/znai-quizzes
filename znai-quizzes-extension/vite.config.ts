@@ -8,7 +8,10 @@ export default defineConfig({
             lib: {
                 entry: './src/main.tsx',
                 name: 'ZnaiQuizzesExtension',
-                formats: ['es', 'umd']
+                formats: ['es']
+            },
+            rolldownOptions: {
+                external: ['react', 'react-dom'],
             }
         },
         define: {
