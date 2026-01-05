@@ -1,4 +1,4 @@
 # Select Demo
 
-:include-select: react-select.json {selectedOption : { "value": "chocolate"}}
+:znaicounter: {initialValue: 5, step: 10}
 

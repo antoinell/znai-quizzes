@@ -1,23 +1,28 @@
-import {defineConfig} from 'vite'
+
+import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/
 export default defineConfig({
-        plugins: [react()],
-        build: {
-            lib: {
-                entry: './src/main.tsx',
-                name: 'ZnaiQuizzesExtension',
-                formats: ['es']
-            },
-            rolldownOptions: {
-                external: ['react', 'react-dom'],
+    plugins: [react()],
+    build: {
+        lib: {
+            entry: 'src/ZnaiCounterComponentRegistration.ts',
+            name: 'ZnaiQuizzesExtension',
+            fileName: 'znai-quizzes-extension',
+            formats: ['es'] // Force ES module format
+        },
+        rollupOptions: {
+            // Externalize React - don't bundle it
+            external: ['react', 'react-dom'],
+            output: {
+                globals: {
+                    react: 'React',
+                    'react-dom': 'ReactDOM'
+                },
+                format: 'es' // Ensure ES module output
             }
         },
-        define: {
-            'process.env.NODE_ENV': JSON.stringify('production'),
-            'process.env': JSON.stringify({}),
-            'global': 'globalThis',
-        }
+        target: 'es2015',
+        minify: false // For easier debugging
     }
-)
+})

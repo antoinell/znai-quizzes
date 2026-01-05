@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {ZnaiSelect} from './doc-elements/znai-select/ZnaiSelect';
+import {ZnaiCounter} from './doc-elements/znai-counter/ZnaiCounter';
 
 // Extend the znai library with the quiz component
 declare global {
@@ -30,15 +30,15 @@ declare global {
 }
 
 // Register the component when the script loads
-async function registerZnaiSelectComponent() {
+async function registerZnaiCounterComponent() {
   const checkAndRegister = async () => {
     try {
       // Import from the module map
-      const module = await import('znai-components');
+      const module = await import('/znai-components.es.js?url');
 
       // Check if elementsLibrary exists
       if (module.elementsLibrary?.library) {
-        module.elementsLibrary.library.ZnaiSelect = ZnaiSelect;
+        module.elementsLibrary.library.ZnaiCounter = ZnaiCounter;
         console.log('ZnaiSelect component registered successfully');
         return true;
       } else {
@@ -66,7 +66,7 @@ async function registerZnaiSelectComponent() {
       if (retrySuccess || attempts >= maxAttempts) {
         clearInterval(interval);
         if (!retrySuccess) {
-          console.warn(`Failed to register ZnaiSelect after ${maxAttempts} attempts`);
+          console.warn(`Failed to register ZnaiCounter after ${maxAttempts} attempts`);
         }
       }
     }, 500); // Check every 500ms
@@ -76,12 +76,12 @@ async function registerZnaiSelectComponent() {
 // Auto-register when script loads
 if (typeof window !== 'undefined') {
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', registerZnaiSelectComponent);
+    document.addEventListener('DOMContentLoaded', registerZnaiCounterComponent);
   } else {
-    registerZnaiSelectComponent();
+    registerZnaiCounterComponent();
   }
 }
 
 // Also export for manual registration if needed
-export { ZnaiSelect, registerZnaiSelectComponent };
-export default registerZnaiSelectComponent;
+export { ZnaiCounter, registerZnaiCounterComponent };
+export default registerZnaiCounterComponent;

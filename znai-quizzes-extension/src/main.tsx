@@ -3,8 +3,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App.tsx'
-import registerZnaiSelectComponent from "./ZnaiSelectComponentRegistration";
-registerZnaiSelectComponent();
+import registerZnaiCounterComponent from "./ZnaiCounterComponentRegistration";
+registerZnaiCounterComponent();
 ReactDOM.render(
     <React.StrictMode>
         <App />

@@ -18,46 +18,40 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public class SelectIncludePlugin implements IncludePlugin {
-    private Path selectPath;
-    private String jsonText;
+public class CounterIncludePlugin implements IncludePlugin {
 
     @Override
     public String id() {
-        return "select";
+        return "znaicounter";
     }
 
     @Override
     public IncludePlugin create() {
-        return new SelectIncludePlugin();
+        return new CounterIncludePlugin();
     }
 
     @Override
     public PluginParamsDefinition parameters() {
-        return SelectPluginParams.definition;
+        return CounterPluginParams.definition;
     }
 
     @Override
     public PluginResult process(ComponentsRegistry componentsRegistry, ParserHandler parserHandler, Path markupPath, PluginParams pluginParams) {
-        selectPath = componentsRegistry.resourceResolver().fullPath(pluginParams.getFreeParam());
-        jsonText = componentsRegistry.resourceResolver().textContent(selectPath);
-
         Map<String, Object> props = new LinkedHashMap<>(pluginParams.getOpts().toMap());
-        props.put("options", JsonPath.read(jsonText, "$"));
         PluginParamsOpts opts = pluginParams.getOpts();
-        Map<String, String> selectedOption = opts.get("selectedOption");
-        props.put("selectedOption", selectedOption);
-        return PluginResult.docElement("ZnaiSelect", props);
+        props.put("initialCount", opts.get("initialCount"));
+        props.put("step", opts.get("step"));
+        return PluginResult.docElement("ZnaiCounter", props);
     }
 
     @Override
     public Stream<AuxiliaryFile> auxiliaryFiles(ComponentsRegistry componentsRegistry) {
-        return Stream.of(AuxiliaryFile.builtTime(selectPath));
+        return Stream.empty();
     }
 
     @Override
     public List<SearchText> textForSearch() {
-        return List.of(SearchScore.STANDARD.text(this.jsonText));
+        return List.of(SearchScore.STANDARD.text("znaiCounter"));
     }
 
 }

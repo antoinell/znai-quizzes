@@ -19,8 +19,9 @@ package org.testingisdocumenting.znai.extensions.select;
 import org.testingisdocumenting.znai.extensions.PluginParamType;
 import org.testingisdocumenting.znai.extensions.PluginParamsDefinition;
 
-class SelectPluginParams {
+class CounterPluginParams {
     static final PluginParamsDefinition definition = new PluginParamsDefinition()
-            .add("selectedOption", PluginParamType.OBJECT, "selected option", "true");
+            .add("initialCount", PluginParamType.NUMBER, "initial Count", "2")
+            .add("step", PluginParamType.NUMBER, "step", "1");
 
 }
