@@ -22,3 +22,6 @@ znai-quizzes-extension.js:14 Uncaught Error: Calling `require` for "react" in an
     at znai-quizzes-extension.js:76:14
     at znai-quizzes-extension.js:3:290
 ```
+
+In order to deal with this, one course of action is to make a minimal
+playground based off information from [A Complete Guide On How To Build A React Library With Vite](https://tomaszs2.medium.com/a-complete-guide-on-how-to-build-a-react-library-with-vite-1ce8507c922e)
